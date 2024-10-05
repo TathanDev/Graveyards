@@ -1,0 +1,12 @@
+{
+  "id": "graveyards:arachnophobe",
+  "level": 1,
+  "monsters": [
+    "minecraft:spider",
+    "minecraft:zombie"
+  ],
+  "rewards": {
+    "experience": 10,
+    "loot_table": "minecraft:entities/spider"
+  }
+}
