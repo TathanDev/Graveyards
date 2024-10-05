@@ -3,10 +3,9 @@ package fr.tathan.graveyards.common.datas;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import fr.tathan.graveyards.common.network.packets.SyncDatapackPacket;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
@@ -15,30 +14,40 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.storage.loot.LootTable;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * All the infos about a battle
  */
-public record GraveyardData(ResourceLocation id, int level, List<ResourceKey<EntityType<?>>> monsters, Rewards rewards) {
+public record GravestoneData(ResourceLocation id, int level, Optional<String> modRequired, List<ResourceKey<EntityType<?>>> monsters, Rewards rewards) {
 
-    public static final Codec<GraveyardData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            ResourceLocation.CODEC.fieldOf("id").forGetter(GraveyardData::id),
-            Codec.INT.fieldOf("level").forGetter(GraveyardData::level),
-            ResourceKey.codec(Registries.ENTITY_TYPE).listOf().fieldOf("monsters").forGetter(GraveyardData::monsters),
-            Rewards.CODEC.fieldOf("rewards").forGetter(GraveyardData::rewards)
-    ).apply(instance, GraveyardData::new));
+    public static final Codec<GravestoneData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            ResourceLocation.CODEC.fieldOf("id").forGetter(GravestoneData::id),
 
-    public static final StreamCodec<ByteBuf, GraveyardData> STREAM_CODEC = StreamCodec.composite(
+            Codec.INT.fieldOf("level").forGetter(GravestoneData::level),
+            Codec.STRING.optionalFieldOf("mod_required").forGetter(GravestoneData::modRequired),
+            ResourceKey.codec(Registries.ENTITY_TYPE).listOf().fieldOf("monsters").forGetter(GravestoneData::monsters),
+            Rewards.CODEC.fieldOf("rewards").forGetter(GravestoneData::rewards)
+    ).apply(instance, GravestoneData::new));
+
+    public static final StreamCodec<ByteBuf, GravestoneData> STREAM_CODEC = StreamCodec.composite(
             ResourceLocation.STREAM_CODEC,
-            GraveyardData::id,
+            GravestoneData::id,
             ByteBufCodecs.INT,
-            GraveyardData::level,
+            GravestoneData::level,
+            ByteBufCodecs.optional(ByteBufCodecs.STRING_UTF8),
+            GravestoneData::modRequired,
             ResourceKey.streamCodec(Registries.ENTITY_TYPE).apply(ByteBufCodecs.list()),
-            GraveyardData::monsters,
+            GravestoneData::monsters,
             Rewards.STREAM_CODEC,
-            GraveyardData::rewards,
-            GraveyardData::new
+            GravestoneData::rewards,
+            GravestoneData::new
     );
+
+
+    public String getWinComponent() {
+        return "gravestone." + this.id().getNamespace() + "." + this.id().getPath();
+    }
 
     public record Rewards(int experience, ResourceKey<LootTable> tableResource) {
 

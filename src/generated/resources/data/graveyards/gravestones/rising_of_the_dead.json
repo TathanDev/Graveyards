@@ -1,0 +1,14 @@
+{
+  "id": "graveyards:rising_of_the_dead",
+  "level": 1,
+  "monsters": [
+    "minecraft:zombie",
+    "minecraft:zombie",
+    "minecraft:zombie",
+    "minecraft:zombie"
+  ],
+  "rewards": {
+    "experience": 10,
+    "loot_table": "minecraft:chests/simple_dungeon"
+  }
+}

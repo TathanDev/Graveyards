@@ -1,5 +1,8 @@
 {
-  "itemGroup.examplemod": "Example Mod Tab",
-  "block.examplemod.example_block": "Example Block",
-  "item.examplemod.example_item": "Example Item"
+  "graveyards.configuration.graveyardWeight": "Graveyard Weight",
+  "block.graveyards.gravestone": "Gravestone",
+
+  "gravestone.graveyards.arachnophobe": "Congrats %s! You've defeated the Arachnophobe Gravestone!",
+  "gravestone.graveyards.rising_of_the_dead": "Congrats %s! You've defeated the deads for this Gravestone!"
+
 }

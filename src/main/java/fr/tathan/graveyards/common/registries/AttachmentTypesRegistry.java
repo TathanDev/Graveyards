@@ -1,8 +1,8 @@
 package fr.tathan.graveyards.common.registries;
 
 import fr.tathan.graveyards.Graveyards;
-import fr.tathan.graveyards.common.datas.MonsterFightData;
-import fr.tathan.graveyards.common.datas.PlayerFightData;
+import fr.tathan.graveyards.common.attributes.MonsterFightData;
+import fr.tathan.graveyards.common.attributes.PlayerFightData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.attachment.AttachmentType;

@@ -3,10 +3,12 @@
   "level": 1,
   "monsters": [
     "minecraft:spider",
-    "minecraft:zombie"
+    "minecraft:spider",
+    "minecraft:spider",
+    "minecraft:spider"
   ],
   "rewards": {
     "experience": 10,
-    "loot_table": "minecraft:entities/spider"
+    "loot_table": "minecraft:chests/ancient_city"
   }
 }

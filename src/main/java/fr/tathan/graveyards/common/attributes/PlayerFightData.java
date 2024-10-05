@@ -1,4 +1,4 @@
-package fr.tathan.graveyards.common.datas;
+package fr.tathan.graveyards.common.attributes;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

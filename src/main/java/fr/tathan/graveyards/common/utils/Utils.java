@@ -1,12 +1,13 @@
 package fr.tathan.graveyards.common.utils;
 
-import fr.tathan.graveyards.common.datas.GraveyardData;
+import fr.tathan.graveyards.common.datas.GravestoneData;
 import fr.tathan.graveyards.common.datas.GraveyardsDatas;
-import fr.tathan.graveyards.common.datas.PlayerFightData;
+import fr.tathan.graveyards.common.attributes.PlayerFightData;
 import fr.tathan.graveyards.common.registries.AttachmentTypesRegistry;
 import fr.tathan.graveyards.common.registries.BlockRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.fml.ModList;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -32,17 +34,17 @@ public class Utils {
     }
 
     public static void startGraveyard(Player player, BlockPos pos, int level) {
-        GraveyardData graveyardData = randomGraveyard(level);
+        GravestoneData gravestoneData = randomGraveyard(level);
 
-        for (ResourceKey<EntityType<?>> monster : graveyardData.monsters()) {
+        for (ResourceKey<EntityType<?>> monster : gravestoneData.monsters()) {
             EntityType<?> entityType =  BuiltInRegistries.ENTITY_TYPE.get(monster.location());
 
-            MonsterSummoner<?> monsterSummoner = new MonsterSummoner<>(entityType, player.level(), pos, player.getName().getString());
+            MonsterSummoner<?> monsterSummoner = new MonsterSummoner<>(entityType, player, pos);
             monsterSummoner.summon();
         }
 
 
-        player.setData(AttachmentTypesRegistry.PLAYER_FIGHT_DATA, new PlayerFightData(true, level, graveyardData.monsters().size(), pos, graveyardData.id()));
+        player.setData(AttachmentTypesRegistry.PLAYER_FIGHT_DATA, new PlayerFightData(true, level, gravestoneData.monsters().size(), pos, gravestoneData.id()));
 
     }
 
@@ -55,11 +57,11 @@ public class Utils {
 
     public static void finishDuel(Player player) {
         PlayerFightData data = player.getData(AttachmentTypesRegistry.PLAYER_FIGHT_DATA);
-        GraveyardData graveyardData = GraveyardsDatas.GRAVEYARDS.get(data.graveyardId());
+        GravestoneData gravestoneData = GraveyardsDatas.GRAVEYARDS.get(data.graveyardId());
         BlockPos pos = data.graveyardPos();
 
 
-        if (graveyardData == null || player.level().isClientSide) {
+        if (gravestoneData == null || player.level().isClientSide) {
             return;
         }
 
@@ -69,29 +71,40 @@ public class Utils {
         }
 
         //Give Experience to the player
-        player.giveExperienceLevels(graveyardData.rewards().experience());
+        player.giveExperienceLevels(gravestoneData.rewards().experience());
 
-        List<ItemStack> stacks = getRewardItems(data.graveyardPos(), (ServerLevel) player.level(), graveyardData);
+        List<ItemStack> stacks = getRewardItems(data.graveyardPos(), (ServerLevel) player.level(), gravestoneData);
         Random random = new Random();
         for (ItemStack stack : stacks) {
             player.level().addFreshEntity(new ItemEntity(player.level(), pos.getX() + random.nextInt(3), pos.getY() + random.nextInt(3), pos.getZ() + random.nextInt(3), stack));
         }
 
         player.setData(AttachmentTypesRegistry.PLAYER_FIGHT_DATA, AttachmentTypesRegistry.DEFAULT_PLAYER_FIGHT_DATA);
+
+        player.sendSystemMessage(Component.translatable(gravestoneData.getWinComponent(), player.getName().getString(), gravestoneData.level()));
+
     }
 
-    public static GraveyardData randomGraveyard(int level) {
+    public static GravestoneData randomGraveyard(int level) {
 
-        List<GraveyardData> matchingGraveyardData = GraveyardsDatas.GRAVEYARDS.values().stream()
+        List<GravestoneData> matchingGravestoneData = GraveyardsDatas.GRAVEYARDS.values().stream()
                 .filter(data -> data.level() == level)
                 .collect(Collectors.toList());
 
-        return matchingGraveyardData.get(new Random().nextInt(matchingGraveyardData.size()));
+        GravestoneData gravestoneData = matchingGravestoneData.get(new Random().nextInt(matchingGravestoneData.size()));
+
+        gravestoneData.modRequired().ifPresent(mod -> {
+            if (!ModList.get().isLoaded(mod)) {
+                randomGraveyard(level);
+            }
+        });
+
+        return gravestoneData;
     }
 
 
 
-    public static List<ItemStack> getRewardItems(BlockPos pos, ServerLevel level, GraveyardData data) {
+    public static List<ItemStack> getRewardItems(BlockPos pos, ServerLevel level, GravestoneData data) {
         BlockState state = level.getBlockState(pos);
         LootParams.Builder params = (new LootParams.Builder(level)).withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos)).withParameter(LootContextParams.TOOL, ItemStack.EMPTY);
 

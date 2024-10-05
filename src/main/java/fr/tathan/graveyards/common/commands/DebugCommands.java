@@ -2,9 +2,8 @@ package fr.tathan.graveyards.common.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
-import fr.tathan.graveyards.common.datas.PlayerFightData;
+import fr.tathan.graveyards.common.attributes.PlayerFightData;
 import fr.tathan.graveyards.common.registries.AttachmentTypesRegistry;
 import fr.tathan.graveyards.common.utils.Utils;
 import net.minecraft.commands.CommandSourceStack;
@@ -13,7 +12,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
-import net.minecraft.world.level.chunk.ChunkAccess;
 
 public class DebugCommands {
 
