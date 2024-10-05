@@ -1,0 +1,14 @@
+{
+  "id": "graveyards:possessed_village",
+  "level": 3,
+  "monsters": [
+    "minecraft:vindicator",
+    "minecraft:vex",
+    "minecraft:vex",
+    "minecraft:pillager"
+  ],
+  "rewards": {
+    "experience": 10,
+    "loot_table": "minecraft:chests/simple_dungeon"
+  }
+}

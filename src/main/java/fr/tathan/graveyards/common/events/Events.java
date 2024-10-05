@@ -24,7 +24,7 @@ public class Events {
         if (entity.level().isClientSide) return;
 
         if(entity instanceof Player playerDead) {
-            Utils.stopPlayerFighting(player);
+            Utils.stopPlayerFighting(playerDead);
         }
 
         if(source.getEntity() instanceof Player sourcePlayer) {

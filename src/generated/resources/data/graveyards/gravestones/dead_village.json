@@ -1,0 +1,15 @@
+{
+  "id": "graveyards:dead_village",
+  "level": 2,
+  "monsters": [
+    "minecraft:zombie_villager",
+    "minecraft:zombie_villager",
+    "minecraft:zombie_villager",
+    "minecraft:zombie_villager",
+    "minecraft:zombie_villager"
+  ],
+  "rewards": {
+    "experience": 5,
+    "loot_table": "minecraft:chests/simple_dungeon"
+  }
+}

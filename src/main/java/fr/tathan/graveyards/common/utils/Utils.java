@@ -1,6 +1,7 @@
 package fr.tathan.graveyards.common.utils;
 
 import fr.tathan.graveyards.Graveyards;
+import fr.tathan.graveyards.common.blocks.GraveyardBlock;
 import fr.tathan.graveyards.common.datas.GravestoneData;
 import fr.tathan.graveyards.common.datas.GraveyardsDatas;
 import fr.tathan.graveyards.common.attributes.PlayerFightData;
@@ -77,7 +78,7 @@ public class Utils {
         }
 
         // Remove the graveyard block
-        if(player.level().getBlockState(data.graveyardPos()).is(BlockRegistry.GRAVEYARD)) {
+        if(player.level().getBlockState(data.graveyardPos()).getBlock() instanceof GraveyardBlock) {
             player.level().setBlock(data.graveyardPos(), Blocks.AIR.defaultBlockState(), 3);
         }
 
