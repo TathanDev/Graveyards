@@ -23,8 +23,12 @@ public class Events {
 
         if (entity.level().isClientSide) return;
 
-        if(source.getEntity() instanceof Player) {
-            if(data.playerName().equals(((Player) source.getEntity()).getName().getString())) {
+        if(entity instanceof Player playerDead) {
+            Utils.stopPlayerFighting(player);
+        }
+
+        if(source.getEntity() instanceof Player sourcePlayer) {
+            if(data.playerName().equals(sourcePlayer.getName().getString()) && Utils.isPlayerFighting(sourcePlayer)) {
                 player = (Player) source.getEntity();
             }
         } else {
@@ -38,6 +42,7 @@ public class Events {
             }
         }
     }
+
 
 
 }

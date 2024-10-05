@@ -16,7 +16,13 @@ public class BlockRegistry {
     );
 
     public static final DeferredHolder<Block, GraveyardBlock> GRAVEYARD = BLOCKS.register("gravestone" ,
-        () -> new GraveyardBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(2.0F).sound(SoundType.WOOD).noOcclusion()));
+        () -> new GraveyardBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(2.0F).sound(SoundType.STONE).noOcclusion(), 1));
+
+    public static final DeferredHolder<Block, GraveyardBlock> GOLD_GRAVEYARD = BLOCKS.register("gold_gravestone" ,
+            () -> new GraveyardBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(2.0F).sound(SoundType.STONE).noOcclusion(), 2));
+
+    public static final DeferredHolder<Block, GraveyardBlock> DIAMOND_GRAVEYARD = BLOCKS.register("diamond_gravestone" ,
+            () -> new GraveyardBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(2.0F).sound(SoundType.STONE).noOcclusion(), 3));
 
 
 }

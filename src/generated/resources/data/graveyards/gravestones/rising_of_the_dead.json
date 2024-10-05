@@ -8,7 +8,7 @@
     "minecraft:zombie"
   ],
   "rewards": {
-    "experience": 10,
+    "experience": 3,
     "loot_table": "minecraft:chests/simple_dungeon"
   }
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "graveyards:item/amulet_of_forgivness"
+  }
+}

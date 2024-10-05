@@ -15,7 +15,7 @@ public class AttachmentTypesRegistry {
 
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, Graveyards.MODID);
 
-    public static final PlayerFightData DEFAULT_PLAYER_FIGHT_DATA = new PlayerFightData(false, 0, 0, new BlockPos(-64, -64, -64), ResourceLocation.fromNamespaceAndPath(Graveyards.MODID, "null"));
+    public static final PlayerFightData DEFAULT_PLAYER_FIGHT_DATA = new PlayerFightData(false, 0, 0, BlockPos.ZERO, ResourceLocation.fromNamespaceAndPath(Graveyards.MODID, "null"));
 
     public static final Supplier<AttachmentType<PlayerFightData>> PLAYER_FIGHT_DATA = ATTACHMENT_TYPES.register(
             "player_fight_ata", () -> AttachmentType.builder(() -> DEFAULT_PLAYER_FIGHT_DATA)

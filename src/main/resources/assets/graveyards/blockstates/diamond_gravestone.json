@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "graveyards:block/diamond_gravestone",
+      "y": 90
+
+    },
+    "facing=north": {
+      "model": "graveyards:block/diamond_gravestone",
+      "y": -180
+    },
+    "facing=south": {
+      "model": "graveyards:block/diamond_gravestone",
+      "y": -180
+
+    },
+    "facing=west": {
+      "model": "graveyards:block/diamond_gravestone",
+      "y": 90
+    }
+  }
+}

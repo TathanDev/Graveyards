@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " X ",
+    "X X",
+    "YX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:gold_nugget"
+    },
+    "Y": {
+      "item": "minecraft:pumpkin"
+    }
+  },
+  "result": {
+    "id": "graveyards:amulet_of_forgiveness"
+  },
+  "show_notification": true
+
+}

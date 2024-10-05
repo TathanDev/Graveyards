@@ -1,5 +1,6 @@
 package fr.tathan.graveyards.common.utils;
 
+import fr.tathan.graveyards.Graveyards;
 import fr.tathan.graveyards.common.datas.GravestoneData;
 import fr.tathan.graveyards.common.datas.GraveyardsDatas;
 import fr.tathan.graveyards.common.attributes.PlayerFightData;
@@ -9,6 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -33,6 +35,12 @@ public class Utils {
         return player.getData(AttachmentTypesRegistry.PLAYER_FIGHT_DATA).isFighting();
     }
 
+    public static void stopPlayerFighting(Player player) {
+        player.setData(AttachmentTypesRegistry.PLAYER_FIGHT_DATA, new PlayerFightData(false, 0, 0, BlockPos.ZERO, ResourceLocation.fromNamespaceAndPath(Graveyards.MODID, "default")));
+
+    }
+
+
     public static void startGraveyard(Player player, BlockPos pos, int level) {
         GravestoneData gravestoneData = randomGraveyard(level);
 
@@ -56,6 +64,9 @@ public class Utils {
     }
 
     public static void finishDuel(Player player) {
+
+        if(!isPlayerFighting(player)) return;
+
         PlayerFightData data = player.getData(AttachmentTypesRegistry.PLAYER_FIGHT_DATA);
         GravestoneData gravestoneData = GraveyardsDatas.GRAVEYARDS.get(data.graveyardId());
         BlockPos pos = data.graveyardPos();

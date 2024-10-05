@@ -3,12 +3,17 @@ package fr.tathan.graveyards.common.blocks;
 import com.mojang.serialization.MapCodec;
 import fr.tathan.graveyards.common.attributes.PlayerFightData;
 import fr.tathan.graveyards.common.registries.AttachmentTypesRegistry;
+import fr.tathan.graveyards.common.registries.BlockRegistry;
 import fr.tathan.graveyards.common.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -31,18 +36,39 @@ public class GraveyardBlock extends Block {
     public static final IntegerProperty LEVEL;
     public static final DirectionProperty FACING;
 
-    public static final MapCodec<GraveyardBlock> CODEC = simpleCodec(GraveyardBlock::new);
+    public static final MapCodec<GraveyardBlock> CODEC = simpleCodec((blockState) -> {
+        return new GraveyardBlock(blockState, 1);
+    });
 
     @Override
     protected MapCodec<? extends Block> codec() {
         return CODEC;
     }
 
-    public GraveyardBlock(Properties properties) {
+    public GraveyardBlock(Properties properties, int level) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(LEVEL, 1));
+        this.registerDefaultState(this.stateDefinition.any().setValue(LEVEL, level));
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
 
+    }
+
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+
+        if(stack.is(Items.DIAMOND) && state.getValue(LEVEL) == 2) {
+            BlockState newState = BlockRegistry.DIAMOND_GRAVEYARD.get().defaultBlockState().setValue(LEVEL, 3).setValue(FACING, state.getValue(FACING));
+            level.setBlockAndUpdate(pos, newState);
+            stack.shrink(1);
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+        } else if(stack.is(Items.GOLD_INGOT) && state.getValue(LEVEL) == 1) {
+            BlockState newState = BlockRegistry.GOLD_GRAVEYARD.get().defaultBlockState().setValue(LEVEL, 2).setValue(FACING, state.getValue(FACING));
+            level.setBlockAndUpdate(pos, newState);
+            stack.shrink(1);
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+        }
+
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
     @Override

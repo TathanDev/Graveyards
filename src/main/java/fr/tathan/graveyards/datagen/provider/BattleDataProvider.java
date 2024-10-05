@@ -72,12 +72,23 @@ public class BattleDataProvider implements DataProvider {
                 ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie"))
         ), new GravestoneData.Rewards(3, ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("chests/simple_dungeon"))));
 
+        /** Level 2 **/
+        registerGravestone(consumer, "graveyards:dead_village", 2, Optional.empty(), List.of(
+                ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie_villager")),
+                ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie_villager")),
+                ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie_villager")),
+                ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie_villager")),
+                ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie_villager"))
+
+        ), new GravestoneData.Rewards(5, ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("chests/simple_dungeon"))));
+
+
         /** Level 3 **/
-        registerGravestone(consumer, "graveyards:the_ancient_boss", 1, Optional.empty(), List.of(
-                ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("warden")),
-                ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie")),
-                ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie")),
-                ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie"))
+        registerGravestone(consumer, "graveyards:possessed_village", 3, Optional.empty(), List.of(
+                ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("vindicator")),
+                ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("vex")),
+                ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("vex")),
+                ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("pillager"))
         ), new GravestoneData.Rewards(10, ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("chests/simple_dungeon"))));
 
     };
