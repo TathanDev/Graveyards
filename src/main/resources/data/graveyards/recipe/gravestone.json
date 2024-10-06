@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "XXX",
+    "XYX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:polished_andesite"
+    },
+    "Y": {
+      "tag": "c:entity_heads"
+    }
+  },
+  "result": {
+    "id": "graveyards:gravestone"
+  },
+  "show_notification": false
+
+}

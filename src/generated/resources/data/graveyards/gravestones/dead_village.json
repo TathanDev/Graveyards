@@ -1,4 +1,7 @@
 {
+  "actions": [
+    "graveyards:set_night"
+  ],
   "id": "graveyards:dead_village",
   "level": 2,
   "monsters": [

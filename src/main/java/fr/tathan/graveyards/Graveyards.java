@@ -6,10 +6,9 @@ import com.google.gson.ToNumberPolicy;
 import com.mojang.logging.LogUtils;
 import fr.tathan.graveyards.common.config.CommonConfig;
 import fr.tathan.graveyards.common.datas.GraveyardsDatas;
+import fr.tathan.graveyards.common.gravestone_action.GravestoneAction;
 import fr.tathan.graveyards.common.network.packets.SyncDatapackPacket;
-import fr.tathan.graveyards.common.registries.AttachmentTypesRegistry;
-import fr.tathan.graveyards.common.registries.BlockRegistry;
-import fr.tathan.graveyards.common.registries.ItemRegistry;
+import fr.tathan.graveyards.common.registries.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -48,6 +47,8 @@ public class Graveyards {
         BlockRegistry.BLOCKS.register(modEventBus);
         ItemRegistry.ITEMS.register(modEventBus);
         AttachmentTypesRegistry.ATTACHMENT_TYPES.register(modEventBus);
+        CriterionsRegistry.TRIGGER_TYPES.register(modEventBus);
+        GravestoneActionRegistry.GRAVESTONE_ACTION.register(modEventBus);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, CommonConfig.BUILDER.build());
         if (FMLEnvironment.dist.isClient())

@@ -1,0 +1,29 @@
+{
+  "parent": "graveyards:upgrade_gold",
+  "criteria": {
+    "activate_gravestone": {
+      "conditions": {
+        "gravestone_level": 2
+      },
+      "trigger": "graveyards:activate_gravestone"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.graveyards.activate_gold_gravestone.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "graveyards:gold_gravestone"
+    },
+    "title": {
+      "translate": "advancements.graveyards.activate_gold_gravestone.title"
+    }
+  },
+  "requirements": [
+    [
+      "activate_gravestone"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,31 @@
+{
+  "parent": "graveyards:activate_gravestone",
+  "criteria": {
+    "upgrade_gold": {
+      "conditions": {
+        "gravestone_level": 2
+      },
+      "trigger": "graveyards:upgrade_gravestone"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "minecraft:textures/block/andesite_block",
+    "description": {
+      "translate": "advancements.graveyards.upgrade_gold.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:gold_ingot"
+    },
+    "title": {
+      "translate": "advancements.graveyards.upgrade_gold.title"
+    }
+  },
+  "requirements": [
+    [
+      "upgrade_gold"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

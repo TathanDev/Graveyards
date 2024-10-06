@@ -22,18 +22,18 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
-public class BattleDataProvider implements DataProvider {
+public class GravestoneDataProvider implements DataProvider {
 
     private final PackOutput.PathProvider pathProvider;
     private final Codec<GravestoneData> codec;
     private final ResourceKey<Registry<GravestoneData>> registry = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(Graveyards.MODID, "gravestones"));
 
 
-    public BattleDataProvider(PackOutput packOutput) {
+    public GravestoneDataProvider(PackOutput packOutput) {
         this(packOutput, PackOutput.Target.DATA_PACK);
     }
 
-    public BattleDataProvider(PackOutput packOutput,  PackOutput.Target target) {
+    public GravestoneDataProvider(PackOutput packOutput, PackOutput.Target target) {
         this.pathProvider = packOutput.createPathProvider(target, registry.location().getPath());
         this.codec = GravestoneData.CODEC;
     }
@@ -60,17 +60,18 @@ public class BattleDataProvider implements DataProvider {
     protected void build(BiConsumer<ResourceLocation, GravestoneData> consumer) {
 
         /** Level 1 **/
-        registerGravestone(consumer, "graveyards:arachnophobe", 1, Optional.empty(), List.of(
+        registerGravestone(consumer, "graveyards:arachnophobe", 1, Optional.empty(),Optional.empty(), List.of(
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("spider")), Optional.empty(), Optional.empty()),
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("spider")), Optional.empty(), Optional.empty()),
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("spider")), Optional.empty(), Optional.empty()),
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("spider")), Optional.empty(), Optional.empty())
                 ), new GravestoneData.Rewards(3, ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("chests/ancient_city"))));
 
-        registerGravestone(consumer, "graveyards:rising_of_the_dead", 1, Optional.empty(), List.of(
+        registerGravestone(consumer, "graveyards:rising_of_the_dead", 1, Optional.of(List.of(graveyardsLocation("set_night"))),Optional.empty(), List.of(
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie")), Optional.of(
                         List.of(new GravestoneData.Monster.CustomAttribute(Attributes.MOVEMENT_SPEED.getKey(), 0.3),
-                                new GravestoneData.Monster.CustomAttribute(Attributes.SCALE.getKey(), 1.6))),
+                                new GravestoneData.Monster.CustomAttribute(Attributes.SCALE.getKey(), 1.6),
+                                new GravestoneData.Monster.CustomAttribute(Attributes.ATTACK_DAMAGE.getKey(), 4.5))),
                         Optional.empty()),
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie")), Optional.empty(), Optional.empty()),
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie")), Optional.empty(), Optional.empty()),
@@ -78,7 +79,7 @@ public class BattleDataProvider implements DataProvider {
         ), new GravestoneData.Rewards(3, ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("chests/simple_dungeon"))));
 
         /** Level 2 **/
-        registerGravestone(consumer, "graveyards:dead_village", 2, Optional.empty(), List.of(
+        registerGravestone(consumer, "graveyards:dead_village", 2, Optional.of(List.of(graveyardsLocation("set_night"))),Optional.empty(), List.of(
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie_villager")), Optional.empty(), Optional.empty()),
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie_villager")), Optional.empty(), Optional.empty()),
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie_villager")), Optional.empty(),
@@ -90,7 +91,7 @@ public class BattleDataProvider implements DataProvider {
 
 
         /** Level 3 **/
-        registerGravestone(consumer, "graveyards:possessed_village", 3, Optional.empty(), List.of(
+        registerGravestone(consumer, "graveyards:possessed_village", 3, Optional.of(List.of(graveyardsLocation("strike_gravestone"))), Optional.empty(), List.of(
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("vindicator")), Optional.empty(), Optional.empty()),
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("vex")), Optional.empty(), Optional.empty()),
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("vex")), Optional.empty(), Optional.empty()),
@@ -100,9 +101,12 @@ public class BattleDataProvider implements DataProvider {
 
     };
 
-    public static void registerGravestone(BiConsumer<ResourceLocation, GravestoneData> consumer, String id, int level, Optional<String> mod, List<GravestoneData.Monster> monsters, GravestoneData.Rewards rewards) {
-        consumer.accept(ResourceLocation.parse(id), new GravestoneData(ResourceLocation.parse(id), level, mod, monsters, rewards));
+    public static void registerGravestone(BiConsumer<ResourceLocation, GravestoneData> consumer, String id, int level, Optional<List<ResourceLocation>> actions, Optional<String> mod, List<GravestoneData.Monster> monsters, GravestoneData.Rewards rewards) {
+        consumer.accept(ResourceLocation.parse(id), new GravestoneData(ResourceLocation.parse(id), level, actions, mod, monsters, rewards));
     }
 
+    public static ResourceLocation graveyardsLocation(String path) {
+        return ResourceLocation.fromNamespaceAndPath(Graveyards.MODID, path);
+    }
 
 }

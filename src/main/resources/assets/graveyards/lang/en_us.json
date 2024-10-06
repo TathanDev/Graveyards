@@ -7,6 +7,21 @@
   "gravestone.graveyards.possessed_village": "Well done %s! You gave to theses poor possessed villagers a dignified death !",
   "gravestone.graveyards.dead_village": "I can't imagine why theses villagers were zombies... Because there are dead twice!",
   "gravestone.graveyards.ancient_boss": "Next time %s, don't wake up the old one...",
-  "item.graveyards.amulet_of_forgivness": "Amulet of Forgiveness"
+  "item.graveyards.amulet_of_forgiveness": "Amulet of Forgiveness",
+
+  "advancements.graveyards.activate_gravestone.title": "Graveyards",
+  "advancements.graveyards.activate_gravestone.description": "The Return of the deads !",
+  "advancements.graveyards.upgrade_gold.title": "You need a bigger challenge",
+  "advancements.graveyards.upgrade_gold.description": "Upgrade a gravestone to a gold gravestone",
+  "advancements.graveyards.amulet_of_forgiveness.title": "A little bit scared ?",
+  "advancements.graveyards.amulet_of_forgiveness.description": "You used the amulet of forgiveness",
+  "advancements.graveyards.upgrade_diamond.title": "Take care of your precious life...",
+  "advancements.graveyards.upgrade_diamond.description": "Upgrade a gold gravestone to a diamond gravestone",
+  "advancements.graveyards.activate_gold_gravestone.title": "A Golden Gravestone",
+  "advancements.graveyards.activate_gold_gravestone.description": "Activate a golden Gravestone",
+  "advancements.graveyards.activate_diamond_gravestone.title": "The one who want to die",
+  "advancements.graveyards.activate_diamond_gravestone.description": "Activate a diamond Gravestone",
+  "tag.block.c.entity_heads": "Entity Heads",
+  "tag.item.c.entity_heads": "Entity Heads"
 
 }

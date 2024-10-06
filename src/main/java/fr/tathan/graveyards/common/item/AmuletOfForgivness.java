@@ -1,6 +1,9 @@
 package fr.tathan.graveyards.common.item;
 
+import fr.tathan.graveyards.common.advancements.UpgradeGravestoneTrigger;
+import fr.tathan.graveyards.common.advancements.UseAmuletTrigger;
 import fr.tathan.graveyards.common.utils.Utils;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -24,9 +27,13 @@ public class AmuletOfForgivness extends Item {
             Utils.stopPlayerFighting(player);
             player.getItemInHand(usedHand).shrink(1);
 
+            if(player instanceof ServerPlayer) UseAmuletTrigger.Instance.trigger((ServerPlayer) player, player.getItemInHand(usedHand).getItem().builtInRegistryHolder().key());
+
+            return InteractionResultHolder.success(player.getItemInHand(usedHand));
+
         }
 
 
-        return super.use(level, player, usedHand);
+        return InteractionResultHolder.fail(player.getItemInHand(usedHand));
     }
 }

@@ -17,6 +17,13 @@ public class ItemRegistry {
     public static final DeferredItem<BlockItem> GRAVEYARD = ITEMS.registerItem("gravestone",
            properties ->  new BlockItem(BlockRegistry.GRAVEYARD.get(), properties), new Item.Properties());
 
+    public static final DeferredItem<BlockItem> GOLD_GRAVESTONE = ITEMS.registerItem("gold_gravestone",
+            properties ->  new BlockItem(BlockRegistry.GOLD_GRAVEYARD.get(), properties), new Item.Properties());
+
+    public static final DeferredItem<BlockItem> DIAMOND_GRAVESTONE = ITEMS.registerItem("diamond_gravestone",
+            properties ->  new BlockItem(BlockRegistry.DIAMOND_GRAVEYARD.get(), properties), new Item.Properties());
+
+
     public static final DeferredItem<AmuletOfForgivness> AMULET_OF_FORGIVENESS = ITEMS.registerItem("amulet_of_forgiveness",
             AmuletOfForgivness::new, new Item.Properties());
 

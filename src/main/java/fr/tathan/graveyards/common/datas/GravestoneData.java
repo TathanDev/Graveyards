@@ -22,12 +22,12 @@ import java.util.Optional;
 /**
  * All the infos about a battle
  */
-public record GravestoneData(ResourceLocation id, int level, Optional<String> modRequired, List<Monster> monsters, Rewards rewards) {
+public record GravestoneData(ResourceLocation id, int level, Optional<List<ResourceLocation>> actions, Optional<String> modRequired, List<Monster> monsters, Rewards rewards) {
 
     public static final Codec<GravestoneData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             ResourceLocation.CODEC.fieldOf("id").forGetter(GravestoneData::id),
-
             Codec.INT.fieldOf("level").forGetter(GravestoneData::level),
+            ResourceLocation.CODEC.listOf().optionalFieldOf("actions").forGetter(GravestoneData::actions),
             Codec.STRING.optionalFieldOf("mod_required").forGetter(GravestoneData::modRequired),
             Monster.CODEC.listOf().fieldOf("monsters").forGetter(GravestoneData::monsters),
             Rewards.CODEC.fieldOf("rewards").forGetter(GravestoneData::rewards)
@@ -38,6 +38,8 @@ public record GravestoneData(ResourceLocation id, int level, Optional<String> mo
             GravestoneData::id,
             ByteBufCodecs.INT,
             GravestoneData::level,
+            ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC.apply(ByteBufCodecs.list())),
+            GravestoneData::actions,
             ByteBufCodecs.optional(ByteBufCodecs.STRING_UTF8),
             GravestoneData::modRequired,
             Monster.STREAM_CODEC.apply(ByteBufCodecs.list()),

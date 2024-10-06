@@ -1,7 +1,8 @@
 package fr.tathan.graveyards.datagen;
 
 import fr.tathan.graveyards.Graveyards;
-import fr.tathan.graveyards.datagen.provider.BattleDataProvider;
+import fr.tathan.graveyards.datagen.provider.AdvancementsProvider;
+import fr.tathan.graveyards.datagen.provider.GravestoneDataProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -21,8 +22,13 @@ public class ModDatagen {
         // other providers here
         generator.addProvider(
                 event.includeServer(),
-                new BattleDataProvider(output)
+                new GravestoneDataProvider(output)
         );
+        generator.addProvider(
+                event.includeServer(),
+                new AdvancementsProvider(output, event.getLookupProvider(), existingFileHelper)
+        );
+
     }
 
 

@@ -1,12 +1,15 @@
 package fr.tathan.graveyards.common.blocks;
 
 import com.mojang.serialization.MapCodec;
+import fr.tathan.graveyards.common.advancements.ActivateGravestoneTrigger;
+import fr.tathan.graveyards.common.advancements.UpgradeGravestoneTrigger;
 import fr.tathan.graveyards.common.attributes.PlayerFightData;
 import fr.tathan.graveyards.common.registries.AttachmentTypesRegistry;
 import fr.tathan.graveyards.common.registries.BlockRegistry;
 import fr.tathan.graveyards.common.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -36,15 +39,6 @@ public class GraveyardBlock extends Block {
     public static final IntegerProperty LEVEL;
     public static final DirectionProperty FACING;
 
-    public static final MapCodec<GraveyardBlock> CODEC = simpleCodec((blockState) -> {
-        return new GraveyardBlock(blockState, 1);
-    });
-
-    @Override
-    protected MapCodec<? extends Block> codec() {
-        return CODEC;
-    }
-
     public GraveyardBlock(Properties properties, int level) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(LEVEL, level));
@@ -60,12 +54,12 @@ public class GraveyardBlock extends Block {
             BlockState newState = BlockRegistry.DIAMOND_GRAVEYARD.get().defaultBlockState().setValue(LEVEL, 3).setValue(FACING, state.getValue(FACING));
             level.setBlockAndUpdate(pos, newState);
             stack.shrink(1);
-            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+            if(player instanceof ServerPlayer) UpgradeGravestoneTrigger.Instance.trigger((ServerPlayer) player, newState.getValue(LEVEL));
         } else if(stack.is(Items.GOLD_INGOT) && state.getValue(LEVEL) == 1) {
             BlockState newState = BlockRegistry.GOLD_GRAVEYARD.get().defaultBlockState().setValue(LEVEL, 2).setValue(FACING, state.getValue(FACING));
             level.setBlockAndUpdate(pos, newState);
             stack.shrink(1);
-            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+            if(player instanceof ServerPlayer) UpgradeGravestoneTrigger.Instance.trigger((ServerPlayer) player, newState.getValue(LEVEL));
         }
 
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
@@ -99,8 +93,11 @@ public class GraveyardBlock extends Block {
     }
 
     private void startGraveyard(Player player, BlockState state, BlockPos pos) {
+        if(player.level().isClientSide) return;
+
         PlayerFightData data = player.getData(AttachmentTypesRegistry.PLAYER_FIGHT_DATA);
         if(!data.isFighting()) {
+            if(player instanceof ServerPlayer) ActivateGravestoneTrigger.Instance.trigger((ServerPlayer) player, state.getValue(LEVEL));
             Utils.startGraveyard(player, pos, state.getValue(LEVEL));
         }
     }

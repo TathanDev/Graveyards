@@ -2,14 +2,17 @@ package fr.tathan.graveyards.common.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import fr.tathan.graveyards.common.attributes.PlayerFightData;
 import fr.tathan.graveyards.common.registries.AttachmentTypesRegistry;
+import fr.tathan.graveyards.common.registries.GraveyardsRegistry;
 import fr.tathan.graveyards.common.utils.Utils;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 
@@ -24,16 +27,25 @@ public class DebugCommands {
                             player.sendSystemMessage(Component.literal("Is dueling : " + data.isFighting()  + ". He need to kill " + data.monsters()));
                             return 0;
                         }))
-                        .then(Commands.literal("loadedGraveyards")
-                                .then(Commands.argument("level", IntegerArgumentType.integer())
-                                        .executes((CommandContext<CommandSourceStack> context) -> {
-                                            ServerPlayer player = context.getSource().getPlayer();
+                .then(Commands.literal("loadedGraveyards")
+                        .then(Commands.argument("level", IntegerArgumentType.integer())
+                                .executes((CommandContext<CommandSourceStack> context) -> {
+                                    ServerPlayer player = context.getSource().getPlayer();
 
-                                            int level = context.getArgument("level", Integer.class);
-                                            player.sendSystemMessage(Component.literal("Loaded graveyards : " + Utils.randomGraveyard(level)));
-                                            return 0;
-                                        })))
+                                    int level = context.getArgument("level", Integer.class);
+                                    player.sendSystemMessage(Component.literal("Loaded graveyards : " + Utils.randomGraveyard(level)));
+                                    return 0;
+                                })))
+                .then(Commands.literal("gravestoneAction")
+                        .then(Commands.argument("action", StringArgumentType.string())
+                                .executes((CommandContext<CommandSourceStack> context) -> {
+                                    ServerPlayer player = context.getSource().getPlayer();
 
+                                    String actionId = context.getArgument("action", String.class);
+                                    GraveyardsRegistry.GRAVESTONE_ACTION.get(ResourceLocation.parse(actionId)).run(player, player.getData(AttachmentTypesRegistry.PLAYER_FIGHT_DATA)); // returns the dirt block
+
+                                    return 0;
+                                })))
                 .then(Commands.literal("setDueling")
                         .then(Commands.argument("dueling", IntegerArgumentType.integer())
                                 .executes((CommandContext<CommandSourceStack> context) -> {

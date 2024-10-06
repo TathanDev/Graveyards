@@ -1,4 +1,7 @@
 {
+  "actions": [
+    "graveyards:strike_gravestone"
+  ],
   "id": "graveyards:possessed_village",
   "level": 3,
   "monsters": [

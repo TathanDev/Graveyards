@@ -1,4 +1,7 @@
 {
+  "actions": [
+    "graveyards:set_night"
+  ],
   "id": "graveyards:rising_of_the_dead",
   "level": 1,
   "monsters": [
@@ -12,15 +15,10 @@
         {
           "attribute": "minecraft:generic.scale",
           "value": 1.6
-        }
-      ],
-      "items": [
+        },
         {
-          "item": {
-            "count": 1,
-            "id": "minecraft:iron_sword"
-          },
-          "slot": "mainhand"
+          "attribute": "minecraft:generic.attack_damage",
+          "value": 4.5
         }
       ]
     },

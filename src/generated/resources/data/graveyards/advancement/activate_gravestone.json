@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "activate_gravestone": {
+      "conditions": {
+        "gravestone_level": 1
+      },
+      "trigger": "graveyards:activate_gravestone"
+    }
+  },
+  "display": {
+    "background": "minecraft:textures/block/andesite.png",
+    "description": {
+      "translate": "advancements.graveyards.activate_gravestone.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "graveyards:gravestone"
+    },
+    "title": {
+      "translate": "advancements.graveyards.activate_gravestone.title"
+    }
+  },
+  "requirements": [
+    [
+      "activate_gravestone"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

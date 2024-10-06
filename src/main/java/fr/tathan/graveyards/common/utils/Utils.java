@@ -5,8 +5,10 @@ import fr.tathan.graveyards.common.blocks.GraveyardBlock;
 import fr.tathan.graveyards.common.datas.GravestoneData;
 import fr.tathan.graveyards.common.datas.GraveyardsDatas;
 import fr.tathan.graveyards.common.attributes.PlayerFightData;
+import fr.tathan.graveyards.common.gravestone_action.GravestoneAction;
 import fr.tathan.graveyards.common.registries.AttachmentTypesRegistry;
 import fr.tathan.graveyards.common.registries.BlockRegistry;
+import fr.tathan.graveyards.common.registries.GraveyardsRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -51,9 +53,19 @@ public class Utils {
             monsterSummoner.summon();
         }
 
-
         player.setData(AttachmentTypesRegistry.PLAYER_FIGHT_DATA, new PlayerFightData(true, level, gravestoneData.monsters().size(), pos, gravestoneData.id()));
+        if (gravestoneData.actions().isPresent()) {
+            runActions(gravestoneData.actions().get(), player);
+        }
+    }
 
+    public static void runActions(List<ResourceLocation> actions, Player player) {
+        actions.forEach((actionKey) -> {
+            GravestoneAction action = GraveyardsRegistry.GRAVESTONE_ACTION.get(actionKey);
+            if (action != null) {
+                action.run(player, player.getData(AttachmentTypesRegistry.PLAYER_FIGHT_DATA));
+            }
+        });
     }
 
     public static boolean decrementMonsters(Player player) {

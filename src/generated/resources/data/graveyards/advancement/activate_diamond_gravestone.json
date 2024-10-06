@@ -1,0 +1,29 @@
+{
+  "parent": "graveyards:upgrade_diamond",
+  "criteria": {
+    "activate_gravestone": {
+      "conditions": {
+        "gravestone_level": 3
+      },
+      "trigger": "graveyards:activate_gravestone"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.graveyards.activate_diamond_gravestone.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "graveyards:diamond_gravestone"
+    },
+    "title": {
+      "translate": "advancements.graveyards.activate_diamond_gravestone.title"
+    }
+  },
+  "requirements": [
+    [
+      "activate_gravestone"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

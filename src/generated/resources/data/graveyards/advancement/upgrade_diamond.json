@@ -1,0 +1,30 @@
+{
+  "parent": "graveyards:upgrade_gold",
+  "criteria": {
+    "upgrade_diamond": {
+      "conditions": {
+        "gravestone_level": 3
+      },
+      "trigger": "graveyards:upgrade_gravestone"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.graveyards.upgrade_diamond.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:diamond"
+    },
+    "title": {
+      "translate": "advancements.graveyards.upgrade_diamond.title"
+    }
+  },
+  "requirements": [
+    [
+      "upgrade_diamond"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,29 @@
+{
+  "parent": "graveyards:activate_gravestone",
+  "criteria": {
+    "use_amulet": {
+      "conditions": {
+        "item": "graveyards:amulet_of_forgiveness"
+      },
+      "trigger": "graveyards:use_amulet"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.graveyards.amulet_of_forgiveness.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "graveyards:amulet_of_forgiveness"
+    },
+    "title": {
+      "translate": "advancements.graveyards.amulet_of_forgiveness.title"
+    }
+  },
+  "requirements": [
+    [
+      "use_amulet"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
