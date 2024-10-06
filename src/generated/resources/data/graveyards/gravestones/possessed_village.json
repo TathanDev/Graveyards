@@ -2,10 +2,27 @@
   "id": "graveyards:possessed_village",
   "level": 3,
   "monsters": [
-    "minecraft:vindicator",
-    "minecraft:vex",
-    "minecraft:vex",
-    "minecraft:pillager"
+    {
+      "type": "minecraft:vindicator"
+    },
+    {
+      "type": "minecraft:vex"
+    },
+    {
+      "type": "minecraft:vex"
+    },
+    {
+      "type": "minecraft:pillager",
+      "items": [
+        {
+          "item": {
+            "count": 1,
+            "id": "minecraft:crossbow"
+          },
+          "slot": "mainhand"
+        }
+      ]
+    }
   ],
   "rewards": {
     "experience": 10,

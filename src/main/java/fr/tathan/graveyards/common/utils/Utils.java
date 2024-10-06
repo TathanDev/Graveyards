@@ -38,17 +38,16 @@ public class Utils {
 
     public static void stopPlayerFighting(Player player) {
         player.setData(AttachmentTypesRegistry.PLAYER_FIGHT_DATA, new PlayerFightData(false, 0, 0, BlockPos.ZERO, ResourceLocation.fromNamespaceAndPath(Graveyards.MODID, "default")));
-
     }
 
 
     public static void startGraveyard(Player player, BlockPos pos, int level) {
         GravestoneData gravestoneData = randomGraveyard(level);
 
-        for (ResourceKey<EntityType<?>> monster : gravestoneData.monsters()) {
-            EntityType<?> entityType =  BuiltInRegistries.ENTITY_TYPE.get(monster.location());
+        for (GravestoneData.Monster monster : gravestoneData.monsters()) {
+            EntityType<?> entityType =  BuiltInRegistries.ENTITY_TYPE.get(monster.type());
 
-            MonsterSummoner<?> monsterSummoner = new MonsterSummoner<>(entityType, player, pos);
+            MonsterSummoner<?> monsterSummoner = new MonsterSummoner<>(entityType, monster, player, pos);
             monsterSummoner.summon();
         }
 

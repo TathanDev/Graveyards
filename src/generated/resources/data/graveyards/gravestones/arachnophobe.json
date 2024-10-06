@@ -2,10 +2,18 @@
   "id": "graveyards:arachnophobe",
   "level": 1,
   "monsters": [
-    "minecraft:spider",
-    "minecraft:spider",
-    "minecraft:spider",
-    "minecraft:zombie"
+    {
+      "type": "minecraft:spider"
+    },
+    {
+      "type": "minecraft:spider"
+    },
+    {
+      "type": "minecraft:spider"
+    },
+    {
+      "type": "minecraft:spider"
+    }
   ],
   "rewards": {
     "experience": 3,

@@ -11,10 +11,13 @@ import fr.tathan.graveyards.common.registries.AttachmentTypesRegistry;
 import fr.tathan.graveyards.common.registries.BlockRegistry;
 import fr.tathan.graveyards.common.registries.ItemRegistry;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
@@ -25,9 +28,11 @@ import org.slf4j.Logger;
 
 @Mod(Graveyards.MODID)
 public class Graveyards {
+
     public static final String MODID = "graveyards";
-    // Directly reference a slf4j logger
+
     public static final Logger LOGGER = LogUtils.getLogger();
+
     public static final Gson GSON = new GsonBuilder()
             .setPrettyPrinting()
             .setObjectToNumberStrategy(ToNumberPolicy.LONG_OR_DOUBLE)
@@ -45,7 +50,11 @@ public class Graveyards {
         AttachmentTypesRegistry.ATTACHMENT_TYPES.register(modEventBus);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, CommonConfig.BUILDER.build());
-        modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+        if (FMLEnvironment.dist.isClient())
+        {
+            modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+
+        }
 
     }
 
@@ -70,4 +79,5 @@ public class Graveyards {
     public static void onAddReloadListenerEvent(AddReloadListenerEvent event) {
         event.addListener(new GraveyardsDatas());
     }
+
 }

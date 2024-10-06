@@ -2,11 +2,39 @@
   "id": "graveyards:dead_village",
   "level": 2,
   "monsters": [
-    "minecraft:zombie_villager",
-    "minecraft:zombie_villager",
-    "minecraft:zombie_villager",
-    "minecraft:zombie_villager",
-    "minecraft:zombie_villager"
+    {
+      "type": "minecraft:zombie_villager"
+    },
+    {
+      "type": "minecraft:zombie_villager"
+    },
+    {
+      "type": "minecraft:zombie_villager",
+      "items": [
+        {
+          "item": {
+            "count": 1,
+            "id": "minecraft:iron_sword"
+          },
+          "slot": "mainhand"
+        }
+      ]
+    },
+    {
+      "type": "minecraft:zombie_villager"
+    },
+    {
+      "type": "minecraft:zombie_villager",
+      "items": [
+        {
+          "item": {
+            "count": 1,
+            "id": "minecraft:iron_axe"
+          },
+          "slot": "mainhand"
+        }
+      ]
+    }
   ],
   "rewards": {
     "experience": 5,
