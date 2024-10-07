@@ -15,13 +15,20 @@ public class CommonConfig {
             .comment("The change for a graveyard to spawn in a village")
             .defineInRange("graveyardWeight", 50, 0, 1000);
 
+    private static final ModConfigSpec.IntValue AMULET_OF_VISION_RADIUS = BUILDER
+            .comment("The radius of the amulet of vision")
+            .defineInRange("amuletOfVisionRadius", 20, 0, 100);
+
+
     public static int graveYardWeight;
+    public static int amuletOfVisionRadius;
 
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event)
     {
         graveYardWeight = GRAVEYARD_WEIGHT.get();
+        amuletOfVisionRadius = AMULET_OF_VISION_RADIUS.get();
     }
 
 

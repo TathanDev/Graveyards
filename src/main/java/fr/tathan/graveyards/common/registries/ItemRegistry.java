@@ -2,6 +2,7 @@ package fr.tathan.graveyards.common.registries;
 
 import fr.tathan.graveyards.Graveyards;
 import fr.tathan.graveyards.common.item.AmuletOfForgivness;
+import fr.tathan.graveyards.common.item.AmuletOfVision;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -26,6 +27,9 @@ public class ItemRegistry {
 
     public static final DeferredItem<AmuletOfForgivness> AMULET_OF_FORGIVENESS = ITEMS.registerItem("amulet_of_forgiveness",
             AmuletOfForgivness::new, new Item.Properties());
+
+    public static final DeferredItem<AmuletOfVision> AMULET_OF_VISION = ITEMS.registerItem("amulet_of_vision",
+            AmuletOfVision::new, new Item.Properties());
 
 
 }

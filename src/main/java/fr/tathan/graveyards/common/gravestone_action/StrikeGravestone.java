@@ -20,7 +20,7 @@ public class StrikeGravestone extends GravestoneAction {
 
         Level level = player.level();
         LightningBolt lightningBolt = new LightningBolt(EntityType.LIGHTNING_BOLT, level);
-        lightningBolt.setPos(pos.getX(), pos.getY(), pos.getZ());
+        lightningBolt.setPos(pos.getX(), pos.getY() + 3, pos.getZ());
         level.addFreshEntity(lightningBolt);
 
     }

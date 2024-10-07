@@ -44,9 +44,6 @@ authors="${mod_authors}" #optional
 
 description='''${mod_description}'''
 
-[[mixins]]
-config="graveyards.mixin.json"
-
 [[accessTransformers]]
 file="META-INF/accesstransformer.cfg"
 

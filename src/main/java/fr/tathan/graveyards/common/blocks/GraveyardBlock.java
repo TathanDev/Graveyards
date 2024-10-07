@@ -1,11 +1,13 @@
 package fr.tathan.graveyards.common.blocks;
 
 import com.mojang.serialization.MapCodec;
+import fr.tathan.graveyards.Graveyards;
 import fr.tathan.graveyards.common.advancements.ActivateGravestoneTrigger;
 import fr.tathan.graveyards.common.advancements.UpgradeGravestoneTrigger;
 import fr.tathan.graveyards.common.attributes.PlayerFightData;
 import fr.tathan.graveyards.common.registries.AttachmentTypesRegistry;
 import fr.tathan.graveyards.common.registries.BlockRegistry;
+import fr.tathan.graveyards.common.registries.TagsRegistry;
 import fr.tathan.graveyards.common.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -50,6 +52,8 @@ public class GraveyardBlock extends Block {
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 
+        if (stack.is(Items.AIR)) this.startGraveyard(player, state, pos);
+
         if(stack.is(Items.DIAMOND) && state.getValue(LEVEL) == 2) {
             BlockState newState = BlockRegistry.DIAMOND_GRAVEYARD.get().defaultBlockState().setValue(LEVEL, 3).setValue(FACING, state.getValue(FACING));
             level.setBlockAndUpdate(pos, newState);
@@ -62,7 +66,7 @@ public class GraveyardBlock extends Block {
             if(player instanceof ServerPlayer) UpgradeGravestoneTrigger.Instance.trigger((ServerPlayer) player, newState.getValue(LEVEL));
         }
 
-        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+        return ItemInteractionResult.SUCCESS;
     }
 
     @Override
@@ -93,7 +97,8 @@ public class GraveyardBlock extends Block {
     }
 
     private void startGraveyard(Player player, BlockState state, BlockPos pos) {
-        if(player.level().isClientSide) return;
+        if(player.level().isClientSide || player.getUseItem().is(TagsRegistry.DONT_TRIGGER_GRAVESTONE)) return;
+
 
         PlayerFightData data = player.getData(AttachmentTypesRegistry.PLAYER_FIGHT_DATA);
         if(!data.isFighting()) {

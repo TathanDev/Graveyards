@@ -1,0 +1,60 @@
+{
+  "actions": [
+    "graveyards:strike_gravestone"
+  ],
+  "id": "graveyards:ancient_army",
+  "level": 3,
+  "monsters": [
+    {
+      "type": "minecraft:warden",
+      "attributes": [
+        {
+          "attribute": "minecraft:generic.scale",
+          "value": 0.8
+        },
+        {
+          "attribute": "minecraft:generic.attack_damage",
+          "value": 4.0
+        },
+        {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.4
+        }
+      ]
+    },
+    {
+      "type": "minecraft:warden",
+      "attributes": [
+        {
+          "attribute": "minecraft:generic.scale",
+          "value": 0.8
+        },
+        {
+          "attribute": "minecraft:generic.attack_damage",
+          "value": 4.0
+        },
+        {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.4
+        }
+      ]
+    },
+    {
+      "type": "minecraft:warden",
+      "attributes": [
+        {
+          "attribute": "minecraft:generic.scale",
+          "value": 1.6
+        },
+        {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.2
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "experience": 10,
+    "loot_table": "minecraft:chests/simple_dungeon"
+  }
+}

@@ -99,6 +99,26 @@ public class GravestoneDataProvider implements DataProvider {
                         Optional.of(List.of(new GravestoneData.Monster.MonsterItem( new ItemStack(Items.CROSSBOW), EquipmentSlot.MAINHAND))))
         ), new GravestoneData.Rewards(10, ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("chests/simple_dungeon"))));
 
+        registerGravestone(consumer, "graveyards:ancient_army", 3, Optional.of(List.of(graveyardsLocation("strike_gravestone"))), Optional.empty(), List.of(
+                new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("warden")),
+                        Optional.of(List.of(
+                                new GravestoneData.Monster.CustomAttribute(Attributes.SCALE.getKey(), 0.8),
+                                new GravestoneData.Monster.CustomAttribute(Attributes.ATTACK_DAMAGE.getKey(), 4),
+                                new GravestoneData.Monster.CustomAttribute(Attributes.MOVEMENT_SPEED.getKey(), 0.4))),
+                        Optional.empty()),
+                new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("warden")),
+                        Optional.of(List.of(
+                                new GravestoneData.Monster.CustomAttribute(Attributes.SCALE.getKey(), 0.8),
+                                new GravestoneData.Monster.CustomAttribute(Attributes.ATTACK_DAMAGE.getKey(), 4),
+                                new GravestoneData.Monster.CustomAttribute(Attributes.MOVEMENT_SPEED.getKey(), 0.4))),
+                        Optional.empty()),
+                new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("warden")),
+                        Optional.of(List.of(
+                                new GravestoneData.Monster.CustomAttribute(Attributes.SCALE.getKey(), 1.6),
+                                new GravestoneData.Monster.CustomAttribute(Attributes.MOVEMENT_SPEED.getKey(), 0.2))),
+                        Optional.empty())
+        ), new GravestoneData.Rewards(10, ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("chests/simple_dungeon"))));
+
     };
 
     public static void registerGravestone(BiConsumer<ResourceLocation, GravestoneData> consumer, String id, int level, Optional<List<ResourceLocation>> actions, Optional<String> mod, List<GravestoneData.Monster> monsters, GravestoneData.Rewards rewards) {
