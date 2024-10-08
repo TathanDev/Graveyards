@@ -52,7 +52,7 @@ public class GraveyardBlock extends Block {
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 
-        if (stack.is(Items.AIR)) this.startGraveyard(player, state, pos);
+        //if (stack.is(Items.AIR)) this.startGraveyard(player, state, pos);
 
         if(stack.is(Items.DIAMOND) && state.getValue(LEVEL) == 2) {
             BlockState newState = BlockRegistry.DIAMOND_GRAVEYARD.get().defaultBlockState().setValue(LEVEL, 3).setValue(FACING, state.getValue(FACING));
@@ -64,8 +64,10 @@ public class GraveyardBlock extends Block {
             level.setBlockAndUpdate(pos, newState);
             stack.shrink(1);
             if(player instanceof ServerPlayer) UpgradeGravestoneTrigger.Instance.trigger((ServerPlayer) player, newState.getValue(LEVEL));
-        }
+        } else {
+            return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
 
+        }
         return ItemInteractionResult.SUCCESS;
     }
 
