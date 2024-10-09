@@ -8,6 +8,7 @@ import fr.tathan.graveyards.common.config.CommonConfig;
 import fr.tathan.graveyards.common.datas.GraveyardsDatas;
 import fr.tathan.graveyards.common.network.packets.SyncDatapackPacket;
 import fr.tathan.graveyards.common.registries.*;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;

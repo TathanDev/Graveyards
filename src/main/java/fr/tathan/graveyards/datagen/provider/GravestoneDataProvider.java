@@ -65,7 +65,7 @@ public class GravestoneDataProvider implements DataProvider {
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("spider")), Optional.empty(), Optional.empty()),
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("spider")), Optional.empty(), Optional.empty()),
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("spider")), Optional.empty(), Optional.empty())
-                ), new GravestoneData.Rewards(3, ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("chests/ancient_city"))));
+                ), new GravestoneData.Rewards(3, ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(Graveyards.MODID, "gravestones/level_1"))));
 
         registerGravestone(consumer, "graveyards:rising_of_the_dead", 1, Optional.of(List.of(graveyardsLocation("set_night"))),Optional.empty(), List.of(
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie")), Optional.of(
@@ -76,9 +76,33 @@ public class GravestoneDataProvider implements DataProvider {
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie")), Optional.empty(), Optional.empty()),
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie")), Optional.empty(), Optional.empty()),
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie")), Optional.empty(), Optional.empty())
-        ), new GravestoneData.Rewards(3, ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("chests/simple_dungeon"))));
+        ), new GravestoneData.Rewards(3, ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(Graveyards.MODID, "gravestones/level_1"))));
 
         /** Level 2 **/
+        registerGravestone(consumer, "graveyards:the_mummy_curse", 2, Optional.of(List.of(graveyardsLocation("set_night"), graveyardsLocation("strike"))),Optional.empty(), List.of(
+                new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("husk")), Optional.empty(), Optional.empty()),
+                new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("husk")), Optional.empty(),
+                        Optional.of(List.of(new GravestoneData.Monster.MonsterItem( new ItemStack(Items.DIAMOND_SWORD), EquipmentSlot.MAINHAND)))),
+                new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("husk")), Optional.of(
+                        List.of(new GravestoneData.Monster.CustomAttribute(Attributes.MOVEMENT_SPEED.getKey(), 0.3),
+                                new GravestoneData.Monster.CustomAttribute(Attributes.SCALE.getKey(), 1.6),
+                                new GravestoneData.Monster.CustomAttribute(Attributes.ATTACK_DAMAGE.getKey(), 4.5))
+                        ),
+                        Optional.of(List.of(new GravestoneData.Monster.MonsterItem( new ItemStack(Items.IRON_SWORD), EquipmentSlot.MAINHAND)))),
+                new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("husk")), Optional.of(
+                        List.of(new GravestoneData.Monster.CustomAttribute(Attributes.MOVEMENT_SPEED.getKey(), 0.5),
+                                new GravestoneData.Monster.CustomAttribute(Attributes.SCALE.getKey(), 0.8),
+                                new GravestoneData.Monster.CustomAttribute(Attributes.ATTACK_DAMAGE.getKey(), 2))
+                ), Optional.empty()),
+                new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("husk")), Optional.of(
+                        List.of(new GravestoneData.Monster.CustomAttribute(Attributes.MOVEMENT_SPEED.getKey(), 0.5),
+                                new GravestoneData.Monster.CustomAttribute(Attributes.SCALE.getKey(), 0.8),
+                                new GravestoneData.Monster.CustomAttribute(Attributes.ATTACK_DAMAGE.getKey(), 2))
+                ), Optional.empty()),
+                new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("husk")), Optional.empty(),
+                        Optional.of(List.of(new GravestoneData.Monster.MonsterItem( new ItemStack(Items.IRON_AXE), EquipmentSlot.MAINHAND))))
+        ), new GravestoneData.Rewards(5, ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(Graveyards.MODID, "gravestones/level_2"))));
+
         registerGravestone(consumer, "graveyards:dead_village", 2, Optional.of(List.of(graveyardsLocation("set_night"))),Optional.empty(), List.of(
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie_villager")), Optional.empty(), Optional.empty()),
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie_villager")), Optional.empty(), Optional.empty()),
@@ -87,7 +111,7 @@ public class GravestoneDataProvider implements DataProvider {
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie_villager")), Optional.empty(), Optional.empty()),
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("zombie_villager")), Optional.empty(),
                         Optional.of(List.of(new GravestoneData.Monster.MonsterItem( new ItemStack(Items.IRON_AXE), EquipmentSlot.MAINHAND))))
-        ), new GravestoneData.Rewards(5, ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("chests/simple_dungeon"))));
+        ), new GravestoneData.Rewards(5, ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(Graveyards.MODID, "gravestones/level_2"))));
 
 
         /** Level 3 **/
@@ -97,7 +121,7 @@ public class GravestoneDataProvider implements DataProvider {
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("vex")), Optional.empty(), Optional.empty()),
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("pillager")), Optional.empty(),
                         Optional.of(List.of(new GravestoneData.Monster.MonsterItem( new ItemStack(Items.CROSSBOW), EquipmentSlot.MAINHAND))))
-        ), new GravestoneData.Rewards(10, ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("chests/simple_dungeon"))));
+        ), new GravestoneData.Rewards(10, ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(Graveyards.MODID, "gravestones/level_3"))));
 
         registerGravestone(consumer, "graveyards:ancient_army", 3, Optional.of(List.of(graveyardsLocation("strike_gravestone"))), Optional.empty(), List.of(
                 new GravestoneData.Monster(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.withDefaultNamespace("warden")),
@@ -117,7 +141,7 @@ public class GravestoneDataProvider implements DataProvider {
                                 new GravestoneData.Monster.CustomAttribute(Attributes.SCALE.getKey(), 1.6),
                                 new GravestoneData.Monster.CustomAttribute(Attributes.MOVEMENT_SPEED.getKey(), 0.2))),
                         Optional.empty())
-        ), new GravestoneData.Rewards(10, ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("chests/simple_dungeon"))));
+        ), new GravestoneData.Rewards(10, ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(Graveyards.MODID, "gravestones/level_3"))));
 
     };
 

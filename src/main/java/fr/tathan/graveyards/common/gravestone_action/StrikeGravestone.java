@@ -14,6 +14,7 @@ public class StrikeGravestone extends GravestoneAction {
     public StrikeGravestone() {
     }
 
+    @Override
     public void run(Player player, PlayerFightData fightData) {
         if (player.level().isClientSide) return;
         BlockPos pos = fightData.graveyardPos();
@@ -22,7 +23,6 @@ public class StrikeGravestone extends GravestoneAction {
         LightningBolt lightningBolt = new LightningBolt(EntityType.LIGHTNING_BOLT, level);
         lightningBolt.setPos(pos.getX(), pos.getY() + 3, pos.getZ());
         level.addFreshEntity(lightningBolt);
-
     }
 
 }

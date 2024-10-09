@@ -1,0 +1,114 @@
+{
+  "pools": [
+    {
+      "rolls": 5,
+      "bonus_rolls": {
+        "min": 1,
+        "max": 4
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond_block",
+          "weight": 45
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond_leggings",
+          "weight": 45
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:andesite",
+          "weight": 20,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 4
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:experience_bottle",
+          "weight": 50,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 3,
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond_chestplate",
+          "weight": 50,
+          "functions": [
+            {
+              "function": "minecraft:enchant_randomly",
+              "options": [
+                "minecraft:fire_protection",
+                "minecraft:knockback",
+                "minecraft:blast_protection",
+                "minecraft:binding_curse"
+              ],
+              "only_compatible": false
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond_boots",
+          "weight": 50,
+          "functions": [
+            {
+              "function": "minecraft:enchant_randomly",
+              "options": [
+                "minecraft:frost_walker",
+                "minecraft:feather_falling"
+              ],
+              "only_compatible": false
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:turtle_helmet",
+          "weight": 50,
+          "functions": [
+            {
+              "function": "minecraft:set_enchantments",
+              "enchantments": {
+                "minecraft:protection": 5,
+                "minecraft:aqua_affinity": 1,
+                "minecraft:wind_burst": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_sword",
+          "weight": 23
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:nether_star",
+          "weight": 40
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond",
+          "weight": 25,
+          "functions": [
+            {
+              "function": "minecraft:set_name",
+              "name": "Your Key to the next level..."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

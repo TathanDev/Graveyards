@@ -17,6 +17,6 @@
   ],
   "rewards": {
     "experience": 3,
-    "loot_table": "minecraft:chests/ancient_city"
+    "loot_table": "graveyards:gravestones/level_1"
   }
 }

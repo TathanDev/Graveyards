@@ -14,12 +14,11 @@ public class SetNightAction extends GravestoneAction {
     public SetNightAction() {
     }
 
+    @Override
     public void run(Player player, PlayerFightData fightData) {
         if (!player.level().isClientSide) {
             ServerLevel serverlevel = (ServerLevel) player.level();
             serverlevel.setDayTime(new Random().nextInt(13000, 19000));
         }
-
     }
-
 }

@@ -13,6 +13,7 @@
   "gravestone.graveyards.dead_village": "I can't imagine why theses villagers were zombies... Because there are dead twice!",
   "gravestone.graveyards.ancient_boss": "Next time %s, don't wake up the old one...",
   "gravestone.graveyards.ancient_army": "Congrats %s! You've defeated the Ancient Army!",
+  "gravestone.graveyards.the_mummy_curse": "Congrats %s! You've defeated the Great Mummy!",
 
   "advancements.graveyards.activate_gravestone.title": "Graveyards",
   "advancements.graveyards.activate_gravestone.description": "The Return of the deads !",
@@ -28,6 +29,7 @@
   "advancements.graveyards.activate_diamond_gravestone.description": "Activate a diamond Gravestone",
   "tag.block.c.entity_heads": "Entity Heads",
   "tag.item.c.entity_heads": "Entity Heads",
-  "tooltip.graveyards.amulet_of_forgiveness": "Allow you to stop a gravestone... Well the monsters will still be here"
+  "tooltip.graveyards.amulet_of_forgiveness": "Allow you to stop a gravestone... Well the monsters will still be here",
+  "gravestone.graveyards.default_win": "Congrats %s ! You defeated this level %s gravestone !"
 
 }

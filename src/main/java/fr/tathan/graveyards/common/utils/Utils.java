@@ -7,7 +7,6 @@ import fr.tathan.graveyards.common.datas.GraveyardsDatas;
 import fr.tathan.graveyards.common.attributes.PlayerFightData;
 import fr.tathan.graveyards.common.gravestone_action.GravestoneAction;
 import fr.tathan.graveyards.common.registries.AttachmentTypesRegistry;
-import fr.tathan.graveyards.common.registries.BlockRegistry;
 import fr.tathan.graveyards.common.registries.GraveyardsRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -104,7 +103,13 @@ public class Utils {
 
         player.setData(AttachmentTypesRegistry.PLAYER_FIGHT_DATA, AttachmentTypesRegistry.DEFAULT_PLAYER_FIGHT_DATA);
 
-        player.sendSystemMessage(Component.translatable(gravestoneData.getWinComponent(), player.getName().getString(), gravestoneData.level()));
+
+        if(Component.translatable(gravestoneData.getWinComponent()).getString().equals(gravestoneData.getWinComponent())) {
+            player.sendSystemMessage(Component.translatable("gravestone.graveyards.default_win", player.getName().getString(), gravestoneData.level()));
+        } else {
+            player.sendSystemMessage(
+                    Component.translatable(gravestoneData.getWinComponent(), player.getName().getString(), gravestoneData.level()));
+        }
 
     }
 
